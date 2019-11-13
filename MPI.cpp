@@ -1,7 +1,7 @@
-//Bai toan phuong trinh nhiet
+// Bai toan phuong trinh nhiet
 
-#include <iostream>
 #include <cstring>
+#include <iostream>
 #include <omp.h>
 
 #define M 20
@@ -17,24 +17,25 @@ float *dT = new float[1000];
 
 void DHB2(float *T, float *dT) {
   int i;
-  float c,l,r;
-  for ( i = 0 ; i < M-1 ; i++ ){
-    c = *(T+i);
-    l = (i==0)
-    ? 100 : *(T+i-1);
-    r = (i==M-1) ? 25 : *(T+i+1);
-    *(dT+i) = D*(l-2*c+r)/(dx*dx);
+  float c, l, r;
+  for (i = 0; i < M - 1; i++) {
+    c = *(T + i);
+    l = (i == 0) ? 100 : *(T + i - 1);
+    r = (i == M - 1) ? 25 : *(T + i + 1);
+    *(dT + i) = D * (l - 2 * c + r) / (dx * dx);
   }
 }
 
-int main(){
-  for(int i=0;i<M;i++) T[i]=25;
-  int NTime = Time/dt;
+int main() {
+  for (int i = 0; i < M; i++)
+    T[i] = 25;
+  int NTime = Time / dt;
   for (int t = 0; t <= NTime; t++) {
     DHB2(T, dT);
-    for (int i = 0 ; i < M ; i++ )
-      *(T+i) = *(T+i) + *(dT+i)*dt;
-    for(int i=0;i<M;i++) cout<<T[i]<<' ';
-    cout<<endl;
+    for (int i = 0; i < M; i++)
+      *(T + i) = *(T + i) + *(dT + i) * dt;
+    for (int i = 0; i < M; i++)
+      cout << T[i] << ' ';
+    cout << endl;
   }
 }
